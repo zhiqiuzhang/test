@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.6.0/prop-types.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+  <body>
+  	<div id="react"></div>
+  	<script type="text/babel">
+  		class Hello extends React.Component {
+        state = {
+          img: "./liyuit.png",
+          name: this.props.name,
+          arr: ["aaa", "bbb", "ccc"],
+        }
+        changeLogo() {
+          this.setState({
+            img: "./liyu.jpg",
+          }); 
+        }
+        changeName() {
+          this.setState({
+            name: "李四"
+          }); 
+        }
+        addList() {
+          console.log("add");
+          const arr = this.state.arr;
+          arr.push("ddd");
+          this.setState({
+            arr: arr
+          });
+        }
+        render() {
+          console.log("Props: ", this.props);
+          var newAge = this.props.age +1 ;
+          console.log("NewAge:", newAge);
+          console.log("Children:", this.props.children);
+
+          return (
+            <div>
+              <button onClick={this.changeLogo.bind(this)}>换Logo</button>
+              <button onClick={this.changeName.bind(this)}>换名称</button>
+              <button onClick={this.addList.bind(this)}>加列表</button>
+              <ul>
+                {this.state.arr.map((v, i) => {
+                  return (
+                    <li> Index: {i}, Value: {v}</li>
+                  )
+                })}
+              </ul>
+            	<h1>这个是组件Hello</h1>
+            	<h1>用户名：{ this.state.name }</h1>
+            	<img src={this.state.img}/>
+            </div>
+          );
+        }
+  	  }; 
+	  	class React1 extends React.Component {
+	  	  render() {
+	  	    return (
+	  	      <div>
+	  	      	<h1> 这个是测试react组件</h1>
+			  	  	<Hello name="张三" age={123}/>
+	  	      </div>
+	  	    )
+	  	  }
+	    };
+	    ReactDOM.render(<React1 />, document.getElementById('react'));
+  	</script>
+  </body>
+</html>
